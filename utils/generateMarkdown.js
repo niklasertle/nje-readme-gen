@@ -1,18 +1,56 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+// Returns a badge that is positioned next to the title of the README
+function renderLicenseBadge(license) {
+  let response;
+  switch (license) {
+    case 'MIT':
+      response = `![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)`
+      break;
+    case 'GNU': 
+      response = `![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)`
+      break;
+    case 'ISC':
+      response = `![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)`
+      break;
+    case 'Apache':
+      response = `![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)`
+      break;
+    case 'None':
+      response = ``
+    default:
+      break;
+  };
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+  return response;
+}
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+// Returns a link to the license section if there was a license selected
+function renderLicenseLink(license) {
+  if (license === 'None') {
+    return ``
+  } else {
+    return `- [License](#license)`
+  }
+}
 
-// TODO: Create a function to generate markdown for README
-function generateMarkdown({title, description, install, usage, collab, test, license, github, email}) {
-  return `# ${title}
+// Returns text to the license section based on 4 license options given
+function renderLicenseSection(license, year, github) {
+ if (license === 'MIT') {
+    return `## License
+[${license} License Copyright (c) ${year} ${github}](LICENSE)`
+  } else if (license === 'ISC' || license === 'Apache'){
+    return `## License
+[Copyright (c) ${year} ${github}](LICENSE)`
+  } else if (license === 'GNU') {
+    return `## License
+[Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/> Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.](LICENSE)`
+  }else {
+    return ''
+  }
+}
+
+// Takes the data and inputs it into a markdown file
+function generateMarkdown({title, description, install, usage, collab, test, license, year, github, email}) {
+  return `# ${title}  ${renderLicenseBadge(license)}
 
 # Table of Contents
 [Description](#description) - 
@@ -20,31 +58,28 @@ function generateMarkdown({title, description, install, usage, collab, test, lic
 [Usage](#usage) - 
 [Contributing](#contributing) - 
 [Test](#tests) - 
-[License](#license) - 
-[Contact](#contact)
+[Contact](#contact) ${renderLicenseLink(license)}
 
 ## Description
 ${description}
   
-## Installation Instructions
+## Installation
 ${install}
   
-## Usage Information
+## Usage
 ${usage}
   
-## Contribution Guidelines
+## Contributing
 ${collab}
   
-## Test Instructions
+## Tests
 ${test}
-  
-## License Information
-${license}
-  
-## Contact Me
+
+## Contact
 [GitHub](https://github.com/${github})<br>
 Email: ${email}
-`;
+
+${renderLicenseSection(license, year, github)}`
 }
 
 module.exports = {

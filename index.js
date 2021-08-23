@@ -41,10 +41,16 @@ const questions =
             name: 'test'
         },  
         {
-            type: 'input',
+            type: 'list',
             message: 'What license do you use?',
+            choices: ['Apache', 'GNU', 'ISC', 'MIT', 'None'],
             name: 'license'
-        },  
+        },
+        {
+            type: 'input',
+            message: 'What year was your app created in?',
+            name: 'year'
+        },    
         {
             type: 'input',
             message: 'What is your GitHub username?',
@@ -59,8 +65,6 @@ const questions =
 
 // Writes the README file using fs
 function writeToFile(fileName, data) {
-    console.log(fileName);
-    console.log(data);
     fs.writeFile(`${fileName}.md`, genMarkdown.generateMarkdown(data), (err) =>
         err ? console.error(err) : console.log('README created!')
     );
