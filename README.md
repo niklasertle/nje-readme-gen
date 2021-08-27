@@ -18,7 +18,6 @@ To use this program simply input **'node index.js'** into the command line to ru
 
 ## Links
 ![Walkthrough Video](./assets/readme-gif.gif)<br>
-[Walkthrough Video](./assets/readme-walkthrough.mp4) <br>
 [GitHub](https://github.com/niklasertle/nje-readme-gen)
 
 ## Contact
